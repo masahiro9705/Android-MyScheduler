@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data, true){
@@ -28,8 +29,9 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         }
 
         override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
-          val schedule: Schedule? = getItem(position)
-                holder.date.text = DateFormat.format("yyyy/MM/dd", schedule?.date)
+                val schedule: Schedule? = getItem(position)
+                val df = SimpleDateFormat("yyyy/MM/dd")
+                holder.date.text = df.format(schedule?.date)
                 holder.title.text = schedule?.title
         }
 
