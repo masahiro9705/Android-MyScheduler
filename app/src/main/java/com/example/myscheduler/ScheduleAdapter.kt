@@ -32,8 +32,9 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
                 val schedule: Schedule? = getItem(position)
                 val df = SimpleDateFormat("yyyy/MM/dd")
                 holder.date.text = df.format(schedule?.date)
-                holder.title.text = schedule?.title
+                holder.title.text =schedule?.title
         }
+
 
         override fun getItemId(position: Int): Long {
                 return getItem(position)?.id ?: 0
