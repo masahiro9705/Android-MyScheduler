@@ -1,6 +1,7 @@
 package com.example.myscheduler
 
 import android.view.LayoutInflater
+import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -12,6 +13,12 @@ import java.text.SimpleDateFormat
 
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data, true){
+
+        private var listener: ((Long?)-> Unit)? = null
+
+        fun setOnItemClickListener(listener: (Long?)-> Unit) {
+                this.listener = listener
+        }
 
         init {
             setHasStableIds(true)
@@ -33,6 +40,9 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
                 val df = SimpleDateFormat("yyyy/MM/dd")
                 holder.date.text = df.format(schedule?.date)
                 holder.title.text =schedule?.title
+                holder.itemView.setOnClickListener {
+                        listener?.invoke(schedule?.id)
+                }
         }
 
 

@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ScheduleEditActivity::class.java)
             startActivity(intent)
         }
+        adapter.setOnItemClickListener { id ->
+            val intent = Intent(this, ScheduleEditActivity::class.java)
+                .putExtra("schedule_id", id)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroy() {
